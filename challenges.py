@@ -43,14 +43,18 @@ def displayData():
     if request.method == 'POST':
         
         baseurl = "http://www.recipepuppy.com/api/"
-        params = {q: requests.form['ingredient']}
-        r = requests.get(baseurl, params = q)
+        params = {"i": request.form['ingredient']}
+        r = requests.get(baseurl, params = params)
         return r.text
 
 ## Task 4
 ## Note : Since this is a dyanmic URL, recipes function should recieve a paramter called `ingrdient` 
 @app.route('/recipe/<ingredient>')
 def recipes(ingredient):
+  baseurl = "http://www.recipepuppy.com/api/"
+  params = {"i": ingredient}
+  r = requests.get(baseurl, params = params)
+  return r.text
     
     
    
