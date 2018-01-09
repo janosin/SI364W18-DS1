@@ -23,7 +23,7 @@ def enterData():
     s = """<!DOCTYPE html>
 <html>
 <body>
-<form>
+<form action="/result" method="post">
   INGREDIENT:<br>
   <input type="text" name="ingredient" value="eggs">
   <br>
@@ -38,16 +38,22 @@ def enterData():
 ## Task 3.2
 ## Modify the function code and return statement
 ## to display recipes for the ingredient entered
-@app.route('/result',methods = ['POST', 'GET'])
+@app.route('/result', methods = ['POST', 'GET'])
 def displayData():
     if request.method == 'POST':
-        pass
+        
+        baseurl = "http://www.recipepuppy.com/api/"
+        params = {q: requests.form['ingredient']}
+        r = requests.get(baseurl, params = q)
+        return r.text
 
 ## Task 4
 ## Note : Since this is a dyanmic URL, recipes function should recieve a paramter called `ingrdient` 
 @app.route('/recipe/<ingredient>')
-def recipes():
-    pass
+def recipes(ingredient):
+    
+    
+   
 
 if __name__ == '__main__':
     app.run()
